@@ -4,7 +4,9 @@ import useFetch from "../useFetch";
 import { Link } from "react-router-dom";
 
 const MeetupHome = () => {
-  const { data, loading, error } = useFetch("https://backend-neog.vercel.app/events");
+  const { data, loading, error } = useFetch(
+    "https://backend-neog.vercel.app/events"
+  );
   const [eventTypedata, setEventTypedata] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -44,23 +46,24 @@ const MeetupHome = () => {
                 </select>
               </div>
             </nav>
+
             <div className="row">
               {filteredData?.map((event) => (
                 <div className="col-md-4 mb-4" key={event._id}>
                   <div className="card">
-                    <img
-                      src={event.thumbnail}
-                      className="card-img"
-                      alt={event.title}
-                    />
-                    <div className="card-img-overlay">
-                      <Link
-                        to={`/eachEvent/${event._id}`}
-                        className="btn btn-light px-4"
-                      >
-                        {event.eventType}
-                      </Link>
-                    </div>
+                    <Link to={`/eachEvent/${event._id}`}>
+                      <img
+                        src={event.thumbnail}
+                        className="card-img"
+                        alt={event.title}
+                        style={{ height: "250px", objectFit: "cover" }}
+                      />
+                      <div className="card-img-overlay">
+                        <span className="btn btn-light px-4">
+                          {event.eventType}
+                        </span>
+                      </div>
+                    </Link>
                   </div>
                   <p className="fw-normal mb-0">{event.date}</p>
                   <h3 className="card-title mb-5">{event.title}</h3>
