@@ -11,9 +11,28 @@ const MeetupDetailsPage = () => {
     ? data.find((event) => event._id === eachEventId)
     : null;
 
-  if (loading) return <p>Loading event details...</p>;
-  if (error) return <p>Error fetching event details</p>;
-  if (!eachEventData) return <p>Event not found</p>;
+  if (loading)
+    return (
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <p className="text-center fs-5 m-3">Loading event details...</p>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <p className="text-center fs-5 text-danger m-3">
+          Error fetching event details
+        </p>
+      </div>
+    );
+
+  if (!eachEventData)
+    return (
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <p className="text-center fs-5 m-3">Event not found</p>
+      </div>
+    );
 
   return (
     <>
@@ -37,7 +56,9 @@ const MeetupDetailsPage = () => {
                 }}
               />
               <h2>Details:</h2>
-              <p style={{ width: "80%" }}>{eachEventData.description}</p>
+              <p style={{ width: "80%", textAlign: "justify" }}>
+                {eachEventData.description}
+              </p>
               <h2>Additional Information:</h2>
               <p>
                 <b>Dress Code:</b> {eachEventData.dressCode}
@@ -53,7 +74,6 @@ const MeetupDetailsPage = () => {
               ))}
             </div>
 
-            {/* Right sidebar */}
             <div className="col-12 col-md-4 ps-md-4">
               <div className="card shadow-sm p-3 mb-4">
                 <p className="mb-2">
@@ -84,6 +104,7 @@ const MeetupDetailsPage = () => {
                   </div>
                 </div>
               ))}
+
               <div className="d-grid">
                 <button className="btn btn-danger mt-3">RSVP</button>
               </div>
