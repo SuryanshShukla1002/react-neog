@@ -23,8 +23,15 @@ const MeetupHome = () => {
       return titleMatch || tagsMatch;
     });
 
-  if (loading) return <p>Loading events...</p>;
-  if (error) return <p>Error fetching events</p>;
+  // ✅ Improved loading UI
+  if (loading)
+    return (
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <p className="text-center fs-5 m-3">Loading events...</p>
+      </div>
+    );
+
+  if (error) return <p className="text-center mt-5">Error fetching events</p>;
 
   return (
     <>
@@ -69,7 +76,13 @@ const MeetupHome = () => {
                   <h3 className="card-title mb-5">{event.title}</h3>
                 </div>
               ))}
-              {filteredData?.length === 0 && <p>No events found.</p>}
+
+              {/* ✅ Improved "No events found" UI */}
+              {filteredData?.length === 0 && (
+                <div className="d-flex justify-content-center align-items-center vh-50">
+                  <p className="text-center fs-5 m-3">No events found.</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
